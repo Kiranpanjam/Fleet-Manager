@@ -106,6 +106,15 @@ public class Readings {
 	public void setTires(Tires tires) {
 		this.tires = tires;
 	}
+
+	@Override
+	public String toString() {
+		return "Readings [Id=" + Id + ", vin=" + vin + ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", timestamp=" + timestamp + ", fuelVolume=" + fuelVolume + ", speed=" + speed + ", engineHp="
+				+ engineHp + ", checkEngineLightOn=" + checkEngineLightOn + ", engineCoolantLow=" + engineCoolantLow
+				+ ", cruiseControlOn=" + cruiseControlOn + ", engineRpm=" + engineRpm + ", tires=" + tires + "]";
+	}
+	
 	
 	
 	

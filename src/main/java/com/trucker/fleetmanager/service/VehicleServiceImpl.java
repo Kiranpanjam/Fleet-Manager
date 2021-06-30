@@ -18,7 +18,6 @@ public class VehicleServiceImpl implements VehicleService {
 		// TODO Auto-generated method stub
 		for(Vehicle vehicle : vehicles) {
 			vehicleRepo.save(vehicle);
-			System.out.println(vehicle);
 		}
 	}
 

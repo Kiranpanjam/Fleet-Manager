@@ -15,7 +15,6 @@ public class ReadingsServiceImpl implements ReadingsService {
 	@Override
 	public void addReadings(Readings reading) {
 		// TODO Auto-generated method stub
-		System.out.println("Readings service executed...");
 		readingsRepo.save(reading);
 	}
 
