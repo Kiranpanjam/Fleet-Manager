@@ -1,5 +1,7 @@
 package com.trucker.fleetmanager.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,23 @@ public class AlertServiceImpl implements AlertService {
 		// TODO Auto-generated method stub
 		alertsRepo.save(alertDetails);
 	}
+
+
+	@Override
+	public List<AlertDetails> getAlerts(String vin) {
+		// TODO Auto-generated method stub
+		return alertsRepo.findAllByVin(vin);
+	}
+
+
+	@Override
+	public List<AlertDetails> getHighAlerts() {
+		// TODO Auto-generated method stub
+		return alertsRepo.findAllByAlertPriority();
+	}
+
+
+	
+	
 
 }

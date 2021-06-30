@@ -9,6 +9,10 @@ import com.trucker.fleetmanager.model.Readings;
 import com.trucker.fleetmanager.rules.Alerts;
 import com.trucker.fleetmanager.service.ReadingsService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 public class ReadingsController {
 
@@ -17,7 +21,13 @@ public class ReadingsController {
 	@Autowired
 	private Alerts alerts;
 	
-	@PostMapping("/addReadings")
+	
+	@ApiOperation(value = "Post readings to database")
+	@ApiResponses(value = { 
+	  @ApiResponse(code = 200, message = "OK"),
+	  @ApiResponse(code = 400, message = "Invalid ")
+	  })
+	@PostMapping("/readings")
 	public void addReadings(@RequestBody Readings reading) {
 		readingsService.addReadings(reading);
 		alerts.runAlerts(reading);
