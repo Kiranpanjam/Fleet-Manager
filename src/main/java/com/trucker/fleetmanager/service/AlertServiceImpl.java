@@ -31,7 +31,7 @@ public class AlertServiceImpl implements AlertService {
 
 	@Override
 	public List<AlertDetails> getHighAlerts() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
 		return alertsRepo.findAllByAlertPriority();
 	}
 

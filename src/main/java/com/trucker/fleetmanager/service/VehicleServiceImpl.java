@@ -23,6 +23,8 @@ public class VehicleServiceImpl implements VehicleService {
 
 	@Override
 	public List<Vehicle> getVehicles() {
+		
+		System.out.println("=============This line is called================");
 		return (List<Vehicle>) vehicleRepo.findAll();
 	}
 
