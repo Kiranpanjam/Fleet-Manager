@@ -12,6 +12,8 @@ import com.trucker.fleetmanager.model.AlertDetails;
 public interface AlertsRepo extends CrudRepository<AlertDetails, String>{
 	List<AlertDetails> findAllByVin(String vin);
 
-	@Query(value="SELECT * FROM alert_details WHERE time_stamp > NOW() - INTERVAL 2 HOUR and alert_priority = 'HIGH'", nativeQuery = true)
+//	@Query(value="SELECT * FROM alert_details WHERE time_stamp > NOW() - INTERVAL 2 HOUR and alert_priority = 'HIGH'", nativeQuery = true)
+
+	@Query(value="SELECT * FROM alert_details WHERE alert_priority = 'HIGH'", nativeQuery = true)
 	List<AlertDetails> findAllByAlertPriority();
 }
