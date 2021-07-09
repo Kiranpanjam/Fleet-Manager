@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JacksonException;
 import com.trucker.fleetmanager.model.Readings;
 import com.trucker.fleetmanager.rules.Alerts;
 import com.trucker.fleetmanager.service.ReadingsService;
@@ -28,7 +29,7 @@ public class ReadingsController {
 	  @ApiResponse(code = 400, message = "Invalid ")
 	  })
 	@PostMapping("/readings")
-	public void addReadings(@RequestBody Readings reading) {
+	public void addReadings(@RequestBody Readings reading) throws JacksonException {
 		readingsService.addReadings(reading);
 		alerts.runAlerts(reading);
 	}

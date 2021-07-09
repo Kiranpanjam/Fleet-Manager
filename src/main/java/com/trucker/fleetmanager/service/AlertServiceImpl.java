@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trucker.fleetmanager.awsmessaging.HighAlertsSNS;
 import com.trucker.fleetmanager.model.AlertDetails;
 import com.trucker.fleetmanager.repository.AlertsRepo;
 
@@ -16,9 +20,10 @@ public class AlertServiceImpl implements AlertService {
 	
 	
 	@Override
-	public void addAlert(AlertDetails alertDetails) {
+	public void addAlert(AlertDetails alertDetails) throws JacksonException {
 		// TODO Auto-generated method stub
 		alertsRepo.save(alertDetails);
+		
 	}
 
 

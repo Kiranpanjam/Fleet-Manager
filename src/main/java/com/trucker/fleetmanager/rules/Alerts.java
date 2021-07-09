@@ -5,6 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trucker.fleetmanager.awsmessaging.HighAlertsSNS;
 import com.trucker.fleetmanager.model.AlertDetails;
 import com.trucker.fleetmanager.model.Readings;
 import com.trucker.fleetmanager.model.Vehicle;
@@ -18,10 +21,13 @@ public class Alerts {
 	private VehicleRepo vehicleRepo;
 	@Autowired
 	private AlertService alertService;
+	@Autowired
+	private HighAlertsSNS highAlertsSNS;
+	@Autowired
+	private ObjectMapper objectMapper;
 	
 	
-	
-	public void runAlerts(Readings readings) {
+	public void runAlerts(Readings readings) throws JacksonException {
 		
 		//check tire pressure
 		if(readings.getTires().getFrontLeft() < 32 || readings.getTires().getFrontLeft() > 36 ||
@@ -33,7 +39,9 @@ public class Alerts {
 			alertDetails.setAlertPriority("LOW");
 			alertDetails.setAlertDescription("Check tire pressure...");
 			alertDetails.setTimeStamp(readings.getTimestamp());
-			System.out.println(alertDetails);
+//			System.out.println(alertDetails);
+//			String message = objectMapper.writeValueAsString(alertDetails);
+//			highAlertsSNS.send("High Alert", message);
 			alertService.addAlert(alertDetails);
 		}
 		
@@ -44,7 +52,9 @@ public class Alerts {
 			alertDetails.setAlertPriority("LOW");
 			alertDetails.setAlertDescription("Check engine light and coolant...");
 			alertDetails.setTimeStamp(readings.getTimestamp());
-			System.out.println(alertDetails);
+//			System.out.println(alertDetails);
+//			String message = objectMapper.writeValueAsString(alertDetails);
+//			highAlertsSNS.send("High Alert", message);
 			alertService.addAlert(alertDetails);
 
 		}
@@ -60,7 +70,9 @@ public class Alerts {
 				alertDetails.setAlertPriority("HIGH");
 				alertDetails.setAlertDescription("Engine RPM is higher...");
 				alertDetails.setTimeStamp(readings.getTimestamp());
-				System.out.println(alertDetails);
+				//System.out.println(alertDetails);
+				String message = objectMapper.writeValueAsString(alertDetails);
+				highAlertsSNS.send("High Alert", message);
 				alertService.addAlert(alertDetails);
 
 			}
@@ -71,7 +83,9 @@ public class Alerts {
 				alertDetails.setAlertPriority("MEDIUM");
 				alertDetails.setAlertDescription("Fuel is less than 10%...");
 				alertDetails.setTimeStamp(readings.getTimestamp());
-				System.out.println(alertDetails);
+//				System.out.println(alertDetails);
+//				String message = objectMapper.writeValueAsString(alertDetails);
+//				highAlertsSNS.send("High Alert", message);
 				alertService.addAlert(alertDetails);
 
 			}
